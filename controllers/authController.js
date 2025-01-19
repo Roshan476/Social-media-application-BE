@@ -39,6 +39,10 @@ export const register = async (req, res, next) => {
 export const login = async (req, res, next) => {
   const { email, password } = req.body;
 
+
+  // console.log('login controlker');
+  
+
   try {
     //validation
     if (!email || !password) {
@@ -51,6 +55,9 @@ export const login = async (req, res, next) => {
       path: "friends",
       select: "firstName lastName location profileUrl -password",
     });
+
+    console.log('user', user);
+    
 
     if (!user) {
       next("Invalid email or password");

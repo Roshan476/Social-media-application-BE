@@ -24,7 +24,7 @@ const errorMiddleware = (err, req, res, next) => {
       err.keyValue
     )} field has to be unique!`;
   }
-
+  
   res.status(defaultError.statusCode).json({
     success: defaultError.success,
     message: defaultError.message,

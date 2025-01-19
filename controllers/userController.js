@@ -30,7 +30,7 @@ export const verifyEmail = async (req, res) => {
           })
           .catch((error) => {
             console.log(error);
-            res.redirect(`/users/verified?message=`);
+            res.redirect(`/users/verified?message`);
           });
       } else {
         //token valid
