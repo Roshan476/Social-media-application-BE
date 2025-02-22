@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Web site created using create-react-app" />
+  <link rel="apple-touch-icon" href="/logo192.png" />
+  <link rel="manifest" href="/manifest.json" />
+  <title>ShareFun</title>
+  <script defer src="/static/js/main.4e9a0992.js"></script>
+  <link href="/static/css/main.2609a62c.css" rel="stylesheet" />
+</head>
+<body>
+  <div class="card">
+<div class="icon">
+  <span id="statusIcon" class=""></span>
+</div>
+<div id="statusMessage" class=""></div>
+  <a href="http://localhost:5173/login" id="btn" class="">Login</a>
+  </div>
+ <script>
+ // Retrieve the message and status parameters from the URL
+const urlParams = new URLSearchParams(window.location.search);
+const message = urlParams.get('message');
+const status = urlParams.get('status');
+
+// Select the necessary elements from the DOM
+const card = document.querySelector('.card');
+const statusIcon = document.getElementById('statusIcon');
+const statusMessage = document.getElementById('statusMessage');
+const btn = document.getElementById('btn');
+
+// Update content and apply styles based on the status parameter
+if (status === 'success') {
+    statusIcon.innerHTML = '✔'; // Success icon
+    statusMessage.textContent = message; // Set success message
+    card.classList.add('success'); // Apply success style
+    statusIcon.classList.add('success');
+    statusMessage.classList.add('success');
+    btn.classList.add('showBtn'); // Show button for success
+} 
+else if (status === 'error') {
+    statusIcon.innerHTML = '✘'; // Error icon
+    statusMessage.textContent = message; // Set error message
+    card.classList.add('error'); // Apply error style
+    statusIcon.classList.add('error');
+    statusMessage.classList.add('error');
+    btn.classList.add('hideBtn'); // Hide button for error
+} 
+else {
+  statusIcon.innerHTML = '?'; // Default unknown status icon
+    statusMessage.textContent = "Unknown status"; // Set a default message
+    card.classList.add('unknown'); // Apply unknown status style
+    statusIcon.classList.add('unknown');
+    statusMessage.classList.add('unknown');
+    btn.classList.add('hideBtn'); // Hide button by default
+}
+ </script>
+</body>
+</html>

@@ -1,4 +1,3 @@
-
 import nodemailer from "nodemailer";
 import dotenv from "dotenv";
 import { v4 as uuidv4 } from "uuid";
@@ -13,19 +12,28 @@ const { AUTH_EMAIL, AUTH_PASSWORD, APP_URL } = process.env;
 let transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port:465,
-  sevice:"gmail",
+  service:"gmail",
   auth: {
     user: AUTH_EMAIL,
     pass: AUTH_PASSWORD,
   },
 });
-
+transporter.verify((error, success) => {
+  if (error) {
+    console.log("Error in transporter configuration: ", error);
+  } else {
+    console.log("Server is ready to take our messages.");
+  }
+});
 export const sendVerificationEmail = async (user, res) => {
   const { _id, email, lastName } = user;
 
   const token = _id + uuidv4();
 
   const link = APP_URL + "users/verify/" + _id + "/" + token;
+
+ // Log the verification link
+  console.log('Verification link:', link);
 
   //   mail options
   const mailOptions = {
@@ -74,8 +82,8 @@ export const sendVerificationEmail = async (user, res) => {
           });
         })
         .catch((err) => {
-          console.log(err);
-          res.status(404).json({ message: "Something went wrong" });
+          console.error('Error while sending email:', err); // Detailed logging
+          res.status(500).json({ message: "Failed to send email" }); // Better status code
         });
     }
   } catch (error) {
@@ -89,6 +97,9 @@ export const resetPasswordLink = async (user, res) => {
 
   const token = _id + uuidv4();
   const link = APP_URL + "users/reset-password/" + _id + "/" + token;
+
+ // Log the verification link
+ console.log('Verification link:', link);
 
   //   mail options
   const mailOptions = {

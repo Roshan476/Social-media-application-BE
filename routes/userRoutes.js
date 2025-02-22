@@ -40,13 +40,13 @@ router.post("/profile-view", userAuth, profileViews);
 
 //suggested friends
 router.post("/suggested-friends", userAuth, suggestedFriends);
-
+// email verification
 router.get("/verified", (req, res) => {
-  res.sendFile(path.join(__dirname, "./views/build", "index.html"));
+  res.sendFile(path.join(__dirname, "./views/index.html"));
 });
-
+// password reset
 router.get("/resetpassword", (req, res) => {
-  res.sendFile(path.join(__dirname, "./views/build", "index.html"));
+  res.sendFile(path.join(__dirname, "./views/index.html"));
 });
 
 export default router;
